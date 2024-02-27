@@ -6,9 +6,10 @@ import RefreshBtn from "../components/RefreshBtn";
 const Appointments = () => {
   const dispatch = useDispatch();
   const { data: appointments } = useGetAppointmentsQuery();
+  const { MIN_HOUR, MAX_HOUR, ...cleanAppointments } = appointments || {};
   useEffect(() => {
-    dispatch(getAllAppointments(appointments));
-  }, [appointments, dispatch]);
+    dispatch(getAllAppointments(cleanAppointments));
+  }, [cleanAppointments, dispatch]);
   return (
     <div>
       <h1>Appointments</h1>
@@ -26,7 +27,7 @@ const Appointments = () => {
         </thead>
         <tbody>
           {appointments &&
-            Object.entries(appointments).map(([id, appointment]) => (
+            Object.entries(cleanAppointments).map(([id, appointment]) => (
               <tr key={id}>
                 <td>{id}</td>
                 <td>{appointment.startTimeFormatted}</td>
