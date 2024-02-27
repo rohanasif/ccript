@@ -35,8 +35,11 @@ function Signin() {
   }, [data?.token, dispatch, isSuccess, navigate, username]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-slate-300 p-4 flex flex-col gap-4"
+    >
+      <div className="flex flex-col">
         <label>Username</label>
         <input
           type="text"
@@ -47,7 +50,7 @@ function Signin() {
           required
         />
       </div>
-      <div>
+      <div className="flex flex-col">
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -59,7 +62,9 @@ function Signin() {
         />
       </div>
       <div>
-        <button>{isLoading ? "Loading..." : "Sign In"}</button>
+        <button className="py-2 px-4 text-white rounded-md bg-green-700">
+          {isLoading ? "Loading..." : "Sign In"}
+        </button>
       </div>
       {isError && <p className="text-red-700">{error?.error}</p>}
     </form>
