@@ -6,7 +6,6 @@ import RefreshBtn from "../components/RefreshBtn";
 const Appointments = () => {
   const dispatch = useDispatch();
   const { data: appointments } = useGetAppointmentsQuery();
-  console.log(appointments);
   useEffect(() => {
     dispatch(getAllAppointments(appointments));
   }, [appointments, dispatch]);

@@ -16,8 +16,6 @@ function Signin() {
   const [signin, signinResponse] = useSigninMutation();
   const { isLoading, isSuccess, isError, error, data } = signinResponse;
 
-  console.log(signinResponse);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = { username, password };
