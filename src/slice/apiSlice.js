@@ -5,6 +5,13 @@ export const api = createApi({
   tagTypes: ["currentUser", "appointments", "refresh-token"],
   baseQuery: fetchBaseQuery({
     baseUrl: "https://hiring-test-task.vercel.app/api/",
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     signin: builder.mutation({
@@ -13,22 +20,12 @@ export const api = createApi({
         method: "POST",
         body: user,
       }),
-      prepareHeaders: (headers, { getState }) => {
-        const token = getState().authApi.signIn?.data?.token;
-
-        if (token) {
-          headers.set("Authorization", `Bearer ${token}`);
-        }
-
-        return headers;
-      },
       invalidatesTags: ["currentUser"],
     }),
     refreshToken: builder.mutation({
       query: () => ({
         url: "/refresh-token",
         method: "POST",
-        headers: {},
       }),
       invalidatesTags: ["refresh-token", "appointments"],
     }),

@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRoutes from "./utils/PrivateRoutes";
 const App = () => {
   return (
-    <div>
+    <div className="w-full h-screen flex justify-center items-center">
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Appointments />} />
